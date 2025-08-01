@@ -13,13 +13,16 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
+
 class LoginActivity : AppCompatActivity() {
     lateinit var editTextEmail: EditText
-    lateinit var editTextPassword:EditText
+    lateinit var editTextPassword: EditText
     lateinit var buttonLogin: Button
-    lateinit var buttonNewUser:Button
+    lateinit var buttonNewUser: Button
     lateinit var mediaPlayer: MediaPlayer
     private lateinit var auth: FirebaseAuth
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString()
             val clave = editTextPassword.text.toString()
             //Validaciones de datos requeridos y formatos
-            if(!validateRequiredData())
+            if (!validateRequiredData())
                 return@setOnClickListener
             //Si pasa validación de datos requeridos, ir a pantalla principal
             //val intent = Intent(this, MainActivity::class.java)
@@ -54,14 +57,17 @@ class LoginActivity : AppCompatActivity() {
             //finish()
             AutenticarUsuario(email, clave)
         }
-        buttonNewUser.setOnClickListener{
+        buttonNewUser.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
 
         }
-        mediaPlayer=MediaPlayer.create(this, R.raw.title_screen)
+        mediaPlayer = MediaPlayer.create(this, R.raw.title_screen)
         mediaPlayer.start()
     }
 
-    fun AutenticarUsuario(email:String, password:String){
+
+    fun AutenticarUsuario(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -73,14 +79,16 @@ class LoginActivity : AppCompatActivity() {
                     //finish()
                 } else {
                     Log.w(EXTRA_LOGIN, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, task.exception!!.message,
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, task.exception!!.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-        }
+    }
 
 
-                private fun validateRequiredData():Boolean{
+    private fun validateRequiredData(): Boolean {
         val email = editTextEmail.text.toString()
         val password = editTextPassword.text.toString()
         if (email.isEmpty()) {
@@ -100,6 +108,7 @@ class LoginActivity : AppCompatActivity() {
         }
         return true
     }
+
     override fun onDestroy() {
         mediaPlayer.release()
         super.onDestroy()

@@ -15,4 +15,14 @@
     <string name="text_hall_of_fame">hall of fame</string>
     <string name="text_ducks">Ducks</string>
     <string name="text_player">Player</string>
+    <!-- Strings para la pantalla de Registro -->
+    <string name="hint_confirm_password">Confirm your password</string>
+    <string name="text_sign_up">Register</string>
+    <string name="text_back_to_login">Back to Login</string>
+    <!-- Mensajes de Error para el Registro -->
+    <string name="error_email_invalid">Unvalid e-mail</string>
+    <string name="error_password_min_length_8">Password must have at least 8 characters</string>
+    <string name="error_passwords_no_match">The passwords must match!</string>
+    <string name="error_confirm_password_required">You must confirm password</string>
+    <string name="register_success">¡User register succcesfull!</string>
 </resources>

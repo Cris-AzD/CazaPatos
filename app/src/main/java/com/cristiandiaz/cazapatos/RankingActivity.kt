@@ -39,9 +39,12 @@ class RankingActivity : AppCompatActivity() {
         }
     }
     fun LeerRankingsSQLite(){
-        val jugadoresSQLite = RankingPlayerDBHelper(this).readAllRanking()
+        var jugadoresSQLite = RankingPlayerDBHelper(this).readAllRanking()
+        // Ordena la lista por patos cazados en orden descendente.
+        jugadoresSQLite = ArrayList(jugadoresSQLite.sortedByDescending { it.huntedDucks })
         val recyclerViewRanking: RecyclerView = findViewById(R.id.recyclerViewRanking)
         recyclerViewRanking.layoutManager = LinearLayoutManager(this)
+        // Ahora pasa la lista ya ordenada al adaptador
         recyclerViewRanking.adapter = RankingAdapter(jugadoresSQLite)
         recyclerViewRanking.setHasFixedSize(true)
     }
